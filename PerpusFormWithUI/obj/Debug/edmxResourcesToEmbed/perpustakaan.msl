@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="perpustakaan2ModelStoreContainer" CdmEntityContainer="perpustakaanEntities239">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="perpustakaan2Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tabel_buku">
+      <EntityTypeMapping TypeName="perpustakaan2Model.tabel_buku">
+        <MappingFragment StoreEntitySet="tabel_buku">
+          <ScalarProperty Name="id_buku" ColumnName="id_buku" />
+          <ScalarProperty Name="nama_buku" ColumnName="nama_buku" />
+          <ScalarProperty Name="penerbit_buku" ColumnName="penerbit_buku" />
+          <ScalarProperty Name="stok_buku" ColumnName="stok_buku" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tabel_pegawai">
+      <EntityTypeMapping TypeName="perpustakaan2Model.tabel_pegawai">
+        <MappingFragment StoreEntitySet="tabel_pegawai">
+          <ScalarProperty Name="id_pegawai" ColumnName="id_pegawai" />
+          <ScalarProperty Name="nama_pegawai" ColumnName="nama_pegawai" />
+          <ScalarProperty Name="password_pegawai" ColumnName="password_pegawai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tabel_peminjam">
+      <EntityTypeMapping TypeName="perpustakaan2Model.tabel_peminjam">
+        <MappingFragment StoreEntitySet="tabel_peminjam">
+          <ScalarProperty Name="id_peminjam" ColumnName="id_peminjam" />
+          <ScalarProperty Name="nama_peminjam" ColumnName="nama_peminjam" />
+          <ScalarProperty Name="alamat_peminjam" ColumnName="alamat_peminjam" />
+          <ScalarProperty Name="password_peminjam" ColumnName="password_peminjam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tabel_pengembalian">
+      <EntityTypeMapping TypeName="perpustakaan2Model.tabel_pengembalian">
+        <MappingFragment StoreEntitySet="tabel_pengembalian">
+          <ScalarProperty Name="id_pengembalian" ColumnName="id_pengembalian" />
+          <ScalarProperty Name="id_peminjaman" ColumnName="id_peminjaman" />
+          <ScalarProperty Name="tanggal_kembali" ColumnName="tanggal_kembali" />
+          <ScalarProperty Name="denda" ColumnName="denda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tabel_transaksi_peminjaman">
+      <EntityTypeMapping TypeName="perpustakaan2Model.tabel_transaksi_peminjaman">
+        <MappingFragment StoreEntitySet="tabel_transaksi_peminjaman">
+          <ScalarProperty Name="id_peminjaman" ColumnName="id_peminjaman" />
+          <ScalarProperty Name="id_peminjam" ColumnName="id_peminjam" />
+          <ScalarProperty Name="id_pegawai" ColumnName="id_pegawai" />
+          <ScalarProperty Name="id_buku" ColumnName="id_buku" />
+          <ScalarProperty Name="tanggal_peminjaman" ColumnName="tanggal_peminjaman" />
+          <ScalarProperty Name="tanggal_harus_kembali" ColumnName="tanggal_harus_kembali" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

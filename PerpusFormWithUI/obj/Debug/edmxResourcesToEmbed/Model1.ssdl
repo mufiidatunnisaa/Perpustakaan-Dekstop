@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="perpustakaan2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tabel_buku">
+    <Key>
+      <PropertyRef Name="id_buku" />
+    </Key>
+    <Property Name="id_buku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nama_buku" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="penerbit_buku" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="stok_buku" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tabel_pegawai">
+    <Key>
+      <PropertyRef Name="id_pegawai" />
+    </Key>
+    <Property Name="id_pegawai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nama_pegawai" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password_pegawai" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tabel_peminjam">
+    <Key>
+      <PropertyRef Name="id_peminjam" />
+    </Key>
+    <Property Name="id_peminjam" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nama_peminjam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="alamat_peminjam" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password_peminjam" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tabel_pengembalian">
+    <Key>
+      <PropertyRef Name="id_pengembalian" />
+    </Key>
+    <Property Name="id_pengembalian" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_peminjaman" Type="int" Nullable="false" />
+    <Property Name="tanggal_kembali" Type="date" Nullable="false" />
+    <Property Name="denda" Type="int" />
+  </EntityType>
+  <EntityType Name="tabel_transaksi_peminjaman">
+    <Key>
+      <PropertyRef Name="id_peminjaman" />
+    </Key>
+    <Property Name="id_peminjaman" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_peminjam" Type="int" Nullable="false" />
+    <Property Name="id_pegawai" Type="int" Nullable="false" />
+    <Property Name="id_buku" Type="int" Nullable="false" />
+    <Property Name="tanggal_peminjaman" Type="date" Nullable="false" />
+    <Property Name="tanggal_harus_kembali" Type="date" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_peminjaman_buku">
+    <End Role="tabel_buku" Type="Self.tabel_buku" Multiplicity="1" />
+    <End Role="tabel_transaksi_peminjaman" Type="Self.tabel_transaksi_peminjaman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tabel_buku">
+        <PropertyRef Name="id_buku" />
+      </Principal>
+      <Dependent Role="tabel_transaksi_peminjaman">
+        <PropertyRef Name="id_buku" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_peminjaman_pegawai">
+    <End Role="tabel_pegawai" Type="Self.tabel_pegawai" Multiplicity="1" />
+    <End Role="tabel_transaksi_peminjaman" Type="Self.tabel_transaksi_peminjaman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tabel_pegawai">
+        <PropertyRef Name="id_pegawai" />
+      </Principal>
+      <Dependent Role="tabel_transaksi_peminjaman">
+        <PropertyRef Name="id_pegawai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_peminjaman_peminjam">
+    <End Role="tabel_peminjam" Type="Self.tabel_peminjam" Multiplicity="1" />
+    <End Role="tabel_transaksi_peminjaman" Type="Self.tabel_transaksi_peminjaman" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tabel_peminjam">
+        <PropertyRef Name="id_peminjam" />
+      </Principal>
+      <Dependent Role="tabel_transaksi_peminjaman">
+        <PropertyRef Name="id_peminjam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pengembalian_peminjaman">
+    <End Role="tabel_transaksi_peminjaman" Type="Self.tabel_transaksi_peminjaman" Multiplicity="1" />
+    <End Role="tabel_pengembalian" Type="Self.tabel_pengembalian" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tabel_transaksi_peminjaman">
+        <PropertyRef Name="id_peminjaman" />
+      </Principal>
+      <Dependent Role="tabel_pengembalian">
+        <PropertyRef Name="id_peminjaman" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="perpustakaan2ModelStoreContainer">
+    <EntitySet Name="tabel_buku" EntityType="Self.tabel_buku" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tabel_pegawai" EntityType="Self.tabel_pegawai" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tabel_peminjam" EntityType="Self.tabel_peminjam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tabel_pengembalian" EntityType="Self.tabel_pengembalian" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tabel_transaksi_peminjaman" EntityType="Self.tabel_transaksi_peminjaman" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_peminjaman_buku" Association="Self.FK_peminjaman_buku">
+      <End Role="tabel_buku" EntitySet="tabel_buku" />
+      <End Role="tabel_transaksi_peminjaman" EntitySet="tabel_transaksi_peminjaman" />
+    </AssociationSet>
+    <AssociationSet Name="FK_peminjaman_pegawai" Association="Self.FK_peminjaman_pegawai">
+      <End Role="tabel_pegawai" EntitySet="tabel_pegawai" />
+      <End Role="tabel_transaksi_peminjaman" EntitySet="tabel_transaksi_peminjaman" />
+    </AssociationSet>
+    <AssociationSet Name="FK_peminjaman_peminjam" Association="Self.FK_peminjaman_peminjam">
+      <End Role="tabel_peminjam" EntitySet="tabel_peminjam" />
+      <End Role="tabel_transaksi_peminjaman" EntitySet="tabel_transaksi_peminjaman" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pengembalian_peminjaman" Association="Self.FK_pengembalian_peminjaman">
+      <End Role="tabel_transaksi_peminjaman" EntitySet="tabel_transaksi_peminjaman" />
+      <End Role="tabel_pengembalian" EntitySet="tabel_pengembalian" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
